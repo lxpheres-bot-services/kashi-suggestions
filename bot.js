@@ -61,7 +61,7 @@ if (promptopen === true && promptid === message.author.id) {
     				description: "\n",
     				fields: [{
     				    name: "Submit Suggestion",
-   				    value: "🗣 Send suggestions with this command! Abuse of this command may lead you to getting blocked from this command. \n\nSay anything to continue. \nSay **cancel** to cancel."
+   				    value: "🗣 Send suggestions with this command! Abuse of this command may lead to consequences. \n\nSay anything to continue. \nSay **cancel** to cancel."
  		 		    },
   				],
 				}
