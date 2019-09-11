@@ -36,7 +36,9 @@ module.exports.run = async () => {
 		let commandfile = client.commands.get(cmd.slice(prefix.length));
 		if (commandfile) commandfile.run(client, message, args);
 	});
-	if (message.content === prefix + 'suggest') {
+	client.on("message", async message => {
+ 	 const cont = message.content;
+	if (cont === prefix + 'suggest') {
       if (promptopen === false && promptid !== message.author.id) {
           promptopen = true;
           promptid = message.author.id;
