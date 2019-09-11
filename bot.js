@@ -16,10 +16,6 @@ let rp1 = "";
 let rp2 = "";
 module.exports.run = async () => {
 	const client = new Discord.Client({ disableEveryone: true, fetchAllMembers: true });
-
-	client.commands = new Discord.Collection();
-	});
-
 	client.on("ready", async () => {
 		client.user.setPresence({ game: { type: 3, name: "Kashi Suggestions" }, status: "online" });
 		console.log(`${client.user.tag} has started!`);
