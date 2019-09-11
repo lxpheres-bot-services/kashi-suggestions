@@ -38,6 +38,7 @@ module.exports.run = async () => {
 	});
 	client.on("message", async message => {
  	 const cont = message.content;
+});
 	if (cont === prefix + 'suggest') {
       if (promptopen === false && promptid !== message.author.id) {
           promptopen = true;
