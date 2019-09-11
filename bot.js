@@ -36,10 +36,8 @@ module.exports.run = async () => {
 		let commandfile = client.commands.get(cmd.slice(prefix.length));
 		if (commandfile) commandfile.run(client, message, args);
 	});
-	client.on("message", async message => {
- 	 const cont = message.content;
-});
-	if (cont === prefix + 'suggest') {
+	
+	 if (message.content.startsWith(prefix + "suggest")) {
       if (promptopen === false && promptid !== message.author.id) {
           promptopen = true;
           promptid = message.author.id;
@@ -49,7 +47,7 @@ module.exports.run = async () => {
   }
 if (promptopen === true && promptid === message.author.id) {
       pstage = pstage + 1;
-      if (cont === 'cancel' || cont === 'Cancel') {message.channel.send("Cancelled prompt."); promptopen = false; pstage = 0; promptid = 0;}
+      if (message.content === 'cancel' || message.content === 'Cancel') {message.channel.send("Cancelled prompt."); promptopen = false; pstage = 0; promptid = 0;}
       if (promptopen === false) return;
       if (pstage === 1) {
 	      message.channel.send({embed: {
@@ -74,7 +72,7 @@ if (promptopen === true && promptid === message.author.id) {
 				}
 			});
       } else if (pstage === 3) {
-          p1 = cont;
+          p1 = message.content;
           message.channel.send({embed: {
     				color: 3066993,
     				description: "\n",
@@ -86,7 +84,7 @@ if (promptopen === true && promptid === message.author.id) {
 				}
 			});
       } else if (pstage === 4) {
-	      p2 = cont
+	      p2 = message.content;
 	      message.channel.send({embed: {
     				color: 3066993,
     				description: "\n",
