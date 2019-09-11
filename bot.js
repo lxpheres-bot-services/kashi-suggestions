@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const bot = client;
 const config = require('./config.json');
 const fs = require("fs");
+const cont = message.content;
 let promptopen = false;
 let promptid = 0;
 let pstage = 0;
@@ -19,9 +20,6 @@ module.exports.run = async () => {
 	client.on("ready", async () => {
 		client.user.setPresence({ game: { type: 3, name: "Kashi Suggestions" }, status: "online" });
 		console.log(`${client.user.tag} has started!`);
-	});
-	client.on("message", async message => {
-  	const cont = message.content;
  	});
 	client.on("message", async (message) => {
 
