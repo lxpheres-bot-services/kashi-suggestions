@@ -97,4 +97,12 @@ if (promptopen === true && promptid === message.author.id) {
 	  p2 = "";
 	  }
 	 }
+module.exports.help = {
+	name: "help",
+	usage: "help [command]",
+	description: "sends all server commands",
+	longdes: "Sends a list of all the command to the user who ran the command. This will show details about a command if said.",
+	mentionedperm: "none",
+	category: "Utility"
+};
 	});
