@@ -1,7 +1,6 @@
 module.exports.run = async (bot, message, args) => {
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const bot = client;
 const fs = require("fs");
 let promptopen = false;
 let promptid = 0;
@@ -13,7 +12,7 @@ let rpromptid = 0;
 let rpstage = 0;
 let rp1 = "";
 let rp2 = "";
-client.on("message", async message => {
+bot.on("message", async message => {
  const cont = message.content;
  if (cont.startsWith(prefix + "suggest")) {
       if (promptopen === false && promptid !== message.author.id) {
@@ -77,7 +76,7 @@ if (promptopen === true && promptid === message.author.id) {
   				],
 				}
 			});
-	      client.guilds.get('597859617862582273').channels.get('498640427646189597').send({embed: {
+	      bot.guilds.get('597859617862582273').channels.get('498640427646189597').send({embed: {
     				color: 3066993,
     				description: "\n",
     				fields: [{
