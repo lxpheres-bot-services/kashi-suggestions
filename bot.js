@@ -17,6 +17,7 @@ module.exports.run = async () => {
 		jsfile.forEach((f) => {
 			let props = require(`./commands/${f}`);
 			console.log(`${f} has been loaded!`);
+			client.commands.set(props.help.name, props);
 		});
 	});
 
