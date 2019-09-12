@@ -11,6 +11,7 @@ let rpromptid = 0;
 let rpstage = 0;
 let rp1 = "";
 let rp2 = "";
+let prefix = ";";
 client.on("message", async message => {
  const cont = message.content;
  if (cont.startsWith(prefix + "suggest")) {
