@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const bot = client;
-const config = require('/config.json');
 const fs = require("fs");
 let promptopen = false;
 let promptid = 0;
@@ -19,7 +18,7 @@ let rp2 = "";
           promptopen = true;
           promptid = message.author.id;
       } else {
-	  message.channel.send(config.prompt_active_err)
+	  message.channel.send("You are already in an active prompt!")
       }
   }
 if (promptopen === true && promptid === message.author.id) {
