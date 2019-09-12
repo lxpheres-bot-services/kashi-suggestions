@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const bot = client;
-const config = require('./config.json');
+const config = require('/config.json');
 const fs = require("fs");
 let promptopen = false;
 let promptid = 0;
