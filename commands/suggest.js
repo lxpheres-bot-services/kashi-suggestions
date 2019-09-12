@@ -1,6 +1,5 @@
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
 const Discord = require('discord.js');
-const client = new Discord.Client();
 const fs = require("fs");
 let promptopen = false;
 let promptid = 0;
@@ -12,7 +11,7 @@ let rpromptid = 0;
 let rpstage = 0;
 let rp1 = "";
 let rp2 = "";
-bot.on("message", async message => {
+client.on("message", async message => {
  const cont = message.content;
  if (cont.startsWith(prefix + "suggest")) {
       if (promptopen === false && promptid !== message.author.id) {
@@ -76,7 +75,7 @@ if (promptopen === true && promptid === message.author.id) {
   				],
 				}
 			});
-	      bot.guilds.get('597859617862582273').channels.get('498640427646189597').send({embed: {
+	      client.guilds.get('597859617862582273').channels.get('498640427646189597').send({embed: {
     				color: 3066993,
     				description: "\n",
     				fields: [{
@@ -95,8 +94,10 @@ if (promptopen === true && promptid === message.author.id) {
           pstage = 0;
 	  p1 = "";
 	  p2 = "";
-	  }
-	 }
+	}
+   }
+});
+}
 module.exports.help = {
 	name: "help",
 	usage: "help [command]",
@@ -105,4 +106,3 @@ module.exports.help = {
 	mentionedperm: "none",
 	category: "Utility"
 };
-	});
