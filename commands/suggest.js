@@ -97,3 +97,11 @@ if (promptopen === true && promptid === message.author.id) {
 	  p2 = "";
       }
   }
+module.exports.help = {
+	name: "suggest",
+	usage: "suggest",
+	description: "Suggestion Command",
+	longdes: "Suggestion Command.",
+	mentionedperm: "None",
+	category: "Utility"
+};
