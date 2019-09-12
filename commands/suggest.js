@@ -7,13 +7,13 @@ let promptid = 0;
 let pstage = 0;
 let p1 = "";
 let p2 = "";
-client.on("message", async message => {
- const cont = message.content;
 let rpromptopen = false;
 let rpromptid = 0;
 let rpstage = 0;
 let rp1 = "";
 let rp2 = "";
+client.on("message", async message => {
+ const cont = message.content;
  if (cont.startsWith(prefix + "suggest")) {
       if (promptopen === false && promptid !== message.author.id) {
           promptopen = true;
@@ -95,13 +95,14 @@ if (promptopen === true && promptid === message.author.id) {
           pstage = 0;
 	  p1 = "";
 	  p2 = "";
-      }
-  }
-module.exports.help = {
+	  }
+	 }
+	 module.exports.help = {
 	name: "suggest",
 	usage: "suggest",
-	description: "Suggestion Command",
-	longdes: "Suggestion Command.",
+	description: "Suggestion command",
+	longdes: "Suggestion command.",
 	mentionedperm: "None",
 	category: "Utility"
-};
+	}
+	});
