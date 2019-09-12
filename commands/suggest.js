@@ -1,3 +1,4 @@
+module.exports.run = async (bot, message, args) => {
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const bot = client;
