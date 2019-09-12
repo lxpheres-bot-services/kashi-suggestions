@@ -90,6 +90,7 @@ if (promptopen === true && promptid === message.author.id) {
   				],
 				}
 			});
+	 message.react("✅");
           promptopen = false;
           promptid = 0;
           pstage = 0;
