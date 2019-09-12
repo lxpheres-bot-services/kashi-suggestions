@@ -1,109 +1,147 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const bot = client;
 const fs = require("fs");
-let promptopen = false;
-let promptid = 0;
-let pstage = 0;
-let p1 = "";
-let p2 = "";
-let rpromptopen = false;
-let rpromptid = 0;
-let rpstage = 0;
-let rp1 = "";
-let rp2 = "";
-client.on("message", async message => {
- const cont = message.content;
- if (cont.startsWith(prefix + "suggest")) {
-      if (promptopen === false && promptid !== message.author.id) {
-          promptopen = true;
-          promptid = message.author.id;
-      } else {
-	  message.channel.send("You are already in an active prompt!")
-      }
-  }
-if (promptopen === true && promptid === message.author.id) {
-      pstage = pstage + 1;
-      if (cont === 'cancel' || cont === 'Cancel') {message.channel.send("Cancelled prompt."); promptopen = false; pstage = 0; promptid = 0;}
-      if (promptopen === false) return;
-      if (pstage === 1) {
-	      message.channel.send({embed: {
-    				color: 3066993,
-    				description: "\n",
-    				fields: [{
-    				    name: "Submit Suggestion",
-   				    value: "🗣 Send suggestions with this command! Abuse of this command may lead to consequences. \n\nSay anything to continue. \nSay **cancel** to cancel."
- 		 		    },
-  				],
-				}
-			});
-      } else if (pstage === 2) {
-          message.channel.send({embed: {
-    				color: 3066993,
-    				description: "\n",
-    				fields: [{
-    				    name: "Submit Suggestion",
-   				    value: "❔ What should the **title** of your suggestion be? \n\nState your answer to continue. \nSay **cancel** to cancel."
- 		 		    },
-  				],
-				}
-			});
-      } else if (pstage === 3) {
-          p1 = cont;
-          message.channel.send({embed: {
-    				color: 3066993,
-    				description: "\n",
-    				fields: [{
-    				    name: "Submit Suggestion",
-   				    value: "❔ What should the **description** be? \n\nState your answer to continue. \nSay **cancel** to cancel."
- 		 		    },
-  				],
-				}
-			});
-      } else if (pstage === 4) {
-	      p2 = cont;
-	      message.channel.send({embed: {
-    				color: 3066993,
-    				description: "\n",
-    				fields: [{
-    				    name: "Submit Suggestion",
-   				    value: "Your submission has been sent. \n\nPreview:"
- 		 		    },
-					 {
-						 name: p1,
-						 value: p2
-						 }
-  				],
-				}
-			});
-	      client.guilds.get('597859617862582273').channels.get('498640427646189597').send({embed: {
-    				color: 3066993,
-    				description: "\n",
-    				fields: [{
-    				    name: "Suggestion Sumbitted",
-   				    value: "Sent by " + message.author.tag
- 		 		    },
-					 {
-						 name: p1,
-						 value: p2
-						 }
-  				],
-				}
-			});
-          promptopen = false;
-          promptid = 0;
-          pstage = 0;
-	  p1 = "";
-	  p2 = "";
-	  }
-	 }
+var embedutility = "";
+var embedmoderation = "";
+
+module.exports.run = async (bot, message, args) => {
+	fs.readdir("./commands", (err, files) => {
+		if (err) console.log(err);
+		let jsfile = files.filter((f) => f.split(".").pop() === "js");
+		if (jsfile.length <= 0) {
+			return;
+		}
+
+		jsfile.forEach((f) => {
+			let props = require(`../commands/${f}`);
+			if (props.help.category === "Utility") {
+				embedutility = embedutility + ` \n ;${props.help.name} - ${props.help.description}`;
+			} else if (props.help.category === "Moderation") {
+				embedmoderation = embedmoderation + ` \n ;${props.help.name} - ${props.help.description}`;
+			}
+		});
 	});
+
+	const command = args.shift();
+
+	if (command && "../commands/" + command + ".js") {
+		fs.readdir("./commands", () => {
+			let props = require(`../commands/${command}`);
+			message.channel.send({
+				embed: {
+					color: 10181046,
+					author: {
+						name: bot.user.username,
+						icon_url: bot.user.avatarURL
+					},
+					title: "Commands",
+					description: "K | Kauai Server Bot Commands",
+					fields: [{
+						name: "Name",
+						value: props.help.name,
+						inline: true
+					},
+					{
+						name: "Usage",
+						value: "`;" + props.help.usage + "`",
+						inline: true
+					},
+					{
+						name: "Required Permission",
+						value: props.help.mentionedperm,
+						inline: true
+					},
+					{
+						name: "Category",
+						value: props.help.category,
+						inline: true
+					},
+					{
+						name: "Description",
+						value: props.help.longdes,
+						inline: true
+					},
+					],
+					timestamp: new Date(),
+					footer: {
+						icon_url: bot.user.avatarURL,
+						text: "Bot created by Lxphere"
+					}
+				}
+			});
+		});
+	} else {
+		message.channel.send("I sent a direct message to you of the help menu! If you did not get it, please try enabling `Direct Messages from Server Members` and try again!");
+		message.author.send({
+			embed: {
+				color: 15844367,
+				author: {
+					name: bot.user.username,
+					icon_url: bot.user.avatarURL
+				},
+				title: "K | Server Commands",
+				description: "K | Kauai Server Bot Commands",
+				fields: [{
+					name: "Moderation",
+					value: "`;suggest` - Suggest something for Kashi!"
+				},
+				{
+					name: "Utility",
+					value: "`;ping` - Replies with the bots ping. \n`;help` - Gives you this menu."
+				},
+				{
+					name: "Developer Commands",
+					value: "Developer commands are not shown to the public right now."
+				},
+				{
+					name: "Command Descriptions",
+					value: "Type `;help <command>` here in this DM to get information on a command."
+				},
+				],
+				timestamp: new Date(),
+				footer: {
+					icon_url: bot.user.avatarURL,
+					text: "Bot created by Lxphere"
+				}
+			}
+		});
+
+		const allowedid = ["509125802080600074"];
+
+		if (allowedid.includes(message.author.id)) {
+			message.author.send({
+				embed: {
+					color: 15844367,
+					author: {
+						name: bot.user.username,
+						icon_url: bot.user.avatarURL
+					},
+					title: "Developer",
+					description: "You can see this because you are a developer of the bot.",
+					fields: [{
+						name: "Nil",
+						value: "Nothing set to be here yet."
+					},
+					{
+						name: "Commands",
+						value: "`;reboot` - Restarts the bot. \n`;setname` - Sets the bots username. \n`;sudo` - Forces a command upon a user."
+					},
+					],
+					timestamp: new Date(),
+					footer: {
+						icon_url: bot.user.avatarURL,
+						text: "By Lxphere"
+					}
+				}
+			});
+		}
+	}
+
+};
+
 module.exports.help = {
-	name: "suggest",
+	name: "help",
 	usage: "help [command]",
 	description: "sends all server commands",
 	longdes: "Sends a list of all the command to the user who ran the command. This will show details about a command if said.",
 	mentionedperm: "none",
 	category: "Utility"
 };
-
