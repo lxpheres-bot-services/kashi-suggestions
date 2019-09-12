@@ -101,7 +101,7 @@ if (promptopen === true && promptid === message.author.id) {
 });
 }
 module.exports.help = {
-	name: "help",
+	name: "suggest",
 	usage: "help [command]",
 	description: "sends all server commands",
 	longdes: "Sends a list of all the command to the user who ran the command. This will show details about a command if said.",
