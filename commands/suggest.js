@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const bot = client;
 const fs = require("fs");
+const message = ("message");
 let promptopen = false;
 let promptid = 0;
 let pstage = 0;
