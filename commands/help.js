@@ -85,7 +85,7 @@ module.exports.run = async (bot, message, args) => {
 				},
 				{
 					name: "Utility",
-					value: "`;ping` - Replies with the bots ping."
+					value: "`;ping` - Replies with the bots ping. \n`;help` - Gives you this menu."
 				},
 				{
 					name: "Developer Commands",
