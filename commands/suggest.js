@@ -75,8 +75,7 @@ if (promptopen === true && promptid === message.author.id) {
 						 }
   				],
 				}
-			});
-			message.react("✅");		
+			});		
 	      client.guilds.get('597859617862582273').channels.get('621451133592010782').send({embed: {
     				color: 3066993,
     				description: "\n",
