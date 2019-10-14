@@ -22,7 +22,7 @@ module.exports.run = async () => {
 	});
 
 	client.on("ready", async () => {
-		client.user.setPresence({ game: { type: 3, name: "Kashi Suggestions" }, status: "online" });
+		client.user.setPresence({ game: { type: 3, name: "Test" }, status: "online" });
 		console.log(`${client.user.tag} has started!`);
  	});
 	client.on("message", async (message) => {
