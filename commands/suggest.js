@@ -76,7 +76,7 @@ if (promptopen === true && promptid === message.author.id) {
   				],
 				}
 			});		
-	      client.guilds.get('597859617862582273').channels.get('621451133592010782').send({embed: {
+	      client.guilds.get('613883505675599872').channels.get('632179809581006868').send({embed: {
     				color: 3066993,
     				description: "\n",
     				fields: [{
